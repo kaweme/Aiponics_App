@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         title: 'Aiponics login demo',
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
         ),
         home: new RootPage(auth: new Auth())
         );
