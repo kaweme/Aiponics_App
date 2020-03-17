@@ -21,4 +21,5 @@ flutter:
   assets:
     - assets/flutter-icon.png
     - assets/aipon.png
+    - assets/google_logo.png
 

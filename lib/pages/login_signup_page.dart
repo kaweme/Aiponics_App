@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_demo/pages/root_page.dart';
 import 'package:flutter_login_demo/services/authentication.dart';
+
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
@@ -146,6 +148,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               showEmailInput(),
               showPasswordInput(),
               showPrimaryButton(),
+              _signInButton(),
               showSecondaryButton(),
               showErrorMessage(),
             ],
@@ -174,7 +177,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return new Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 48.0,
@@ -228,6 +231,52 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             _isLoginForm ? 'Create an account' : 'Have an account? Sign in',
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: toggleFormMode);
+  }
+
+  //  Widget googleLoginButton() {
+  //   return new FlatButton(
+  //       child: new Text(
+  //           'Login with Google',
+  //           style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+  //       onPressed: validateAndSubmit);
+  // }
+
+  Widget _signInButton() {
+    return OutlineButton(
+      splashColor: Colors.grey,
+      onPressed: () {
+        widget.auth.signInWithGoogle().whenComplete(() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return RootPage();
+          },
+        ),
+      );
+    });
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      highlightElevation: 0,
+      borderSide: BorderSide(color: Colors.grey),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image(image: AssetImage("assets/google_logo.png"), height: 16.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget showPrimaryButton() {
